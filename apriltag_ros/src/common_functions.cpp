@@ -594,6 +594,13 @@ void TagDetector::drawDetections (cv_bridge::CvImagePtr image)
                 cv::Point((int)(det->c[0]-textsize.width/2),
                           (int)(det->c[1]+textsize.height/2)),
                 fontface, fontscale, cv::Scalar(0xff, 0x99, 0), 2);
+    cv::putText(image->image, //target image
+            "Landing Target Locked!", //text
+            cv::Point(10, image->image.rows-20), //top-left position
+            cv::FONT_HERSHEY_COMPLEX,
+            1.0,
+            CV_RGB(0, 128, 255), //font color
+            2);
   }
 }
 
