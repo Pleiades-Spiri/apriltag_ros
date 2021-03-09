@@ -1,6 +1,5 @@
 <launch>
   <arg name="launch_prefix" default="" /> <!-- set to value="gdbserver localhost:10000" for remote debugging -->
-  <!--<arg name="node_namespace" default="apriltag_ros_continuous_node" />-->
   <arg name="camera_name" default="/stereo/left" />
 
   <arg name="camera_frame" default="left_link" />
@@ -9,10 +8,10 @@
 
 
   <!-- Set parameters -->
-  <rosparam command="load" file="$(find apriltag_ros)/config/settings.yaml"  />
-  <rosparam command="load" file="$(find apriltag_ros)/config/tags.yaml" />
+  <rosparam command="load" file="$(find apriltag_ros)/config/settings.yaml" ns="apriltag_nodelet" />
+  <rosparam command="load" file="$(find apriltag_ros)/config/tags.yaml" ns="apriltag_nodelet"/>
   
-  <node pkg="nodelet" type="nodelet" name="apriltag_nodelet" args="load apriltag_ros/ContinuousDetector standalone_nodelet --no-bond" output="screen" >
+  <node pkg="nodelet" type="nodelet" name="apriltag_nodelet" args="load apriltag_ros/ContinuousDetector standalone_nodelet --no-bond" clear_params="true" output="screen" >
     <!-- Remap topics from those used in code to those on the ROS network -->
     <remap from="image_rect" to="left/image_rect_color" />
     <remap from="camera_info" to="left/camera_info" />
