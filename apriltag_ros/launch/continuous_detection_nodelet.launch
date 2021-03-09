@@ -19,4 +19,8 @@
     <param name="camera_frame" type="str" value="left_link" />
     <param name="publish_tag_detections_image" type="bool" value="true" />      <!-- default: false -->
   </node>
+  <node pkg="nodelet" type="nodelet" name="TagImage2RTSPNodelet" args="load image2rtsp/Image2RTSPNodelet standalone_nodelet --no-bond" output="screen">
+    <!-- Read the stream setup file -->
+        <rosparam command="load" file="$(find ros_rtsp)/config/tag_stream_setup.yaml" />
+  </node>
 </launch>
